@@ -1,0 +1,7 @@
+[Security]
+EAP-Method=TTLS
+EAP-Identity=[REMOVED]
+EAP-TTLS-Phase2-Method=EAP-GTC
+
+[Settings]
+Autoconnect=True

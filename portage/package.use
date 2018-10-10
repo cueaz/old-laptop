@@ -1,0 +1,61 @@
+#dm-crypt
+sys-apps/systemd		cryptsetup
+
+#no cron
+app-admin/logrotate		-cron
+
+#clang
+sys-devel/clang			default-libcxx default-compiler-rt
+
+#os-prober
+sys-boot/grub			mount
+
+#microcode
+sys-firmware/intel-microcode	initramfs
+
+#atomic
+sys-libs/db			-cxx
+
+#samba
+net-fs/samba			client
+sys-libs/tdb			python
+sys-libs/tevent			python
+
+#xdg-user-dirs
+x11-misc/xdg-user-dirs		-gtk
+
+#enchant
+app-i18n/fcitx			-enchant
+
+#rar
+app-arch/p7zip			rar
+
+#neovim
+app-editors/neovim		python
+dev-lua/lpeg			luajit
+dev-lua/mpack			luajit
+
+#bittorrent
+net-misc/aria2			bittorrent
+
+#mupdf libressl
+net-print/cups-filters		-pdf
+
+#x265
+media-video/ffmpeg		x265 openssl
+
+#only driver
+net-print/hplip			minimal
+
+#only wayland
+x11-base/xorg-server		-xorg
+
+#no init clang
+app-emulation/docker		-container-init
+
+#no npm
+net-libs/nodejs			-npm
+
+#qemu
+app-emulation/qemu		usbredir
+net-misc/spice-gtk		usbredir

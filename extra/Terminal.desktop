@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Terminal
+Comment=Simple Terminal
+Exec=terminal
+Icon=utilities-terminal
+Categories=System;TerminalEmulator;
+StartupNotify=true
+X-GNOME-SingleWindow=false

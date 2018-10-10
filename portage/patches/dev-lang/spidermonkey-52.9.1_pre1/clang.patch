@@ -1,0 +1,76 @@
+diff --git a/js/public/GCPolicyAPI.h b/js/public/GCPolicyAPI.h
+index 054e397..9ca67ef 100644
+--- a/js/public/GCPolicyAPI.h
++++ b/js/public/GCPolicyAPI.h
+@@ -62,13 +62,13 @@
+ #define FOR_EACH_PUBLIC_AGGREGATE_GC_POINTER_TYPE(D) \
+     D(JSPropertyDescriptor)
+ 
+-class JSAtom;
+-class JSFunction;
+-class JSObject;
+-class JSScript;
+-class JSString;
++class JS_PUBLIC_API(JSAtom);
++class JS_PUBLIC_API(JSFunction);
++class JS_PUBLIC_API(JSObject);
++class JS_PUBLIC_API(JSScript);
++class JS_PUBLIC_API(JSString);
+ namespace JS {
+-class Symbol;
++class JS_PUBLIC_API(Symbol);
+ }
+ 
+ namespace JS {
+diff --git a/js/public/Realm.h b/js/public/Realm.h
+index 13a22c7..e447147 100644
+--- a/js/public/Realm.h
++++ b/js/public/Realm.h
+@@ -15,8 +15,8 @@
+ 
+ #include "jstypes.h"
+ 
+-struct JSContext;
+-class JSObject;
++struct JS_PUBLIC_API(JSContext);
++class JS_PUBLIC_API(JSObject);
+ 
+ namespace JS {
+ 
+diff --git a/js/public/TypeDecls.h b/js/public/TypeDecls.h
+index acb93f9..f02fc2e 100644
+--- a/js/public/TypeDecls.h
++++ b/js/public/TypeDecls.h
+@@ -21,22 +21,23 @@
+ #include <stdint.h>
+ 
+ #include "js-config.h"
++#include "jstypes.h"
+ 
+-struct JSContext;
+-class JSFunction;
+-class JSObject;
+-class JSScript;
+-class JSString;
+-class JSAddonId;
++struct JS_PUBLIC_API(JSContext);
++class JS_PUBLIC_API(JSFunction);
++class JS_PUBLIC_API(JSObject);
++class JS_PUBLIC_API(JSScript);
++class JS_PUBLIC_API(JSString);
++class JS_PUBLIC_API(JSAddonId);
+ 
+-struct jsid;
++struct JS_PUBLIC_API(jsid);
+ 
+ namespace JS {
+ 
+ typedef unsigned char Latin1Char;
+ 
+-class Symbol;
+-class Value;
++class JS_PUBLIC_API(Symbol);
++class JS_PUBLIC_API(Value);
+ template <typename T> class Handle;
+ template <typename T> class MutableHandle;
+ template <typename T> class Rooted;

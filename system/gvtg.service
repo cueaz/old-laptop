@@ -1,0 +1,11 @@
+[Unit]
+Description=Intel GVT-g vGPU
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'echo "1c30b9b9-1e27-49bd-bca9-c22ea27ae624" > "/sys/devices/pci0000:00/0000:00:02.0/mdev_supported_types/i915-GVTg_V5_4/create"'
+ExecStop=/bin/sh -c 'echo "1" > "/sys/devices/pci0000:00/0000:00:02.0/1c30b9b9-1e27-49bd-bca9-c22ea27ae624/remove"'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=graphical.target

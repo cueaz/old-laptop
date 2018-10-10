@@ -1,0 +1,66 @@
+require 'rake/clean'
+require 'rake/loaders/makefile'
+
+cc = ENV['CC'] || 'clang'
+
+source_dir = 'src'
+object_dir = 'obj'
+depend_dir = 'dep'
+binary_dir = 'bin'
+
+source_files = FileList["#{source_dir}/*.c"]
+object_files = source_files.map do |f|
+  f.sub(/^#{source_dir}/, object_dir).ext('.o')
+end
+depend_files = source_files.map do |f|
+  f.sub(/^#{source_dir}/, depend_dir).ext('.mf')
+end
+
+CLEAN.include("#{object_dir}/*.o", "#{depend_dir}/*.mf")
+CLOBBER.include("#{binary_dir}/*")
+
+directory object_dir
+directory depend_dir
+directory binary_dir
+
+rule '.mf' => [
+  proc {|tn| tn.sub(/^#{depend_dir}/, source_dir).ext('.c')},
+  depend_dir
+] do |t|
+  cmd = "#{cc} -MM #{t.source}"
+  puts cmd
+  result = `#{cmd}`
+  open(t.name, 'w') do |f|
+    f.puts "#{object_dir}/#{result}"
+    f.puts "#{depend_dir}/#{result.sub('.o:', '.mf:')}"
+  end
+end
+
+depend_files.each do |mf|
+  file mf => depend_dir
+  import mf
+end
+
+rule '.o' => [
+  proc {|tn| tn.sub(/^#{object_dir}/, source_dir).ext('.c')},
+  object_dir
+] do |t|
+  sh "#{cc} -c -o #{t.name} #{t.source}"
+end
+
+object_files.each do |o|
+  file o => object_dir
+end
+
+file "#{binary_dir}/app" => object_files + [binary_dir] do |t|
+  sh "#{cc} #{object_files} -o #{t.name}"
+end
+
+task :build => "#{binary_dir}/app"
+
+task :run => "#{binary_dir}/app" do
+  sh "./#{binary_dir}/app"
+end
+
+task :default => :run
+
